@@ -1,7 +1,6 @@
 package com.beratyesbek.springcloudgcpbqstoresfirestore.entity;
 
 import com.google.cloud.spring.data.datastore.core.mapping.Entity;
-import com.google.cloud.spring.data.datastore.core.mapping.Field;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,23 +8,16 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 @Data
-@Entity(name = "notifications")
+@Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Notification {
+public class User {
 
     @Id
     private String id;
+    private String name;
+    private String email;
+    private String phoneNumber;
 
-    private String title;
-
-    private String message;
-
-    @Field(name = "device_id")
-    private String deviceId;
-
-    private User user;
-
-    private boolean read;
 }
