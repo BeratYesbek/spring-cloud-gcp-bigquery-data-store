@@ -39,9 +39,8 @@ public class StockController {
 
         String stockJson = objectMapper.writeValueAsString(stock) + "\n";
         ByteArrayInputStream inputStream = new ByteArrayInputStream(stockJson.getBytes(StandardCharsets.UTF_8));
-        String fullyQualifiedTableName = String.format("%s.%s.%s", projectId, datasetName, tableName);
         CompletableFuture<Job> jobFuture = bigQueryTemplate.writeDataToTable(
-                fullyQualifiedTableName,
+                tableName,
                 inputStream,
                 FormatOptions.json()
         );
