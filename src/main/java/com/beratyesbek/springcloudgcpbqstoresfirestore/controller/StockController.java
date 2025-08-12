@@ -51,12 +51,12 @@ public class StockController {
 
     @PostMapping("/csv")
     public ResponseEntity<String> insertCsv(@RequestParam MultipartFile file) throws IOException {
-        String fullyQualifiedTableName = String.format("%s.%s.%s", projectId, datasetName, tableName);
-        bigQueryTemplate.writeDataToTable(
-                fullyQualifiedTableName,
+        CompletableFuture<Job> jobFuture =   bigQueryTemplate.writeDataToTable(
+                tableName,
                 file.getInputStream(),
                 FormatOptions.csv()
         );
+        jobFuture.join();
         return ResponseEntity.ok("CSV data inserted successfully");
     }
 }
